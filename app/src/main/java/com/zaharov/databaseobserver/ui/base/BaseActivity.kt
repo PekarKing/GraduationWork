@@ -9,9 +9,6 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(OneExecutionStateStrategy::class)
 interface BaseView : MvpView {
-
-    fun updateDialogsTheme()
-
     fun showAlertDialog(
         title: String, message: String,
         posBtnTxt: String? = null, negBtnTxt: String? = null,
@@ -37,8 +34,6 @@ abstract class BaseActivity(@LayoutRes containerLayoutId: Int) :
             setCancelable(cancellable)
         }.show()
     }
-
-    override fun updateDialogsTheme() {}
 
     companion object {
         const val TAG = "BaseActivity"

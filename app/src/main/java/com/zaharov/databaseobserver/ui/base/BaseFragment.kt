@@ -11,7 +11,6 @@ abstract class BaseFragment(@LayoutRes containerLayoutId: Int) :
 
     private var baseActivity: BaseActivity? = null
 
-
     var onBackPressedAction: (() -> Unit)? = null
 
     override fun onAttach(context: Context) {
@@ -31,9 +30,5 @@ abstract class BaseFragment(@LayoutRes containerLayoutId: Int) :
             posBtnAction, negBtnAction,
             cancellable
         )
-    }
-
-    fun updateDialogsTheme() {
-        baseActivity?.updateDialogsTheme()
     }
 }

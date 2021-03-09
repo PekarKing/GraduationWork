@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DatabaseObserver"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.AppActivity">
+        <activity android:name=".ui.app.AppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,43 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:id="@+id/red"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/red_dark" />
-
-        <FrameLayout
-            android:id="@+id/yellow"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/yellow_dark" />
-
-        <FrameLayout
-            android:id="@+id/green"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@color/green_dark" />
-
-    </LinearLayout>
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchTrafficLight"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="48dp"
-        android:text="Button"
-        tools:ignore="HardcodedText" />
+        android:layout_height="match_parent" />
 
-</LinearLayout>
+</RelativeLayout>
