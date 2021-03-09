@@ -1,27 +1,25 @@
 package com.zaharov.databaseobserver.fsm
 
-import kotlinx.coroutines.runBlocking
+open class InfiniteStateMachine {
 
-open class StateMachine {
-
-    protected open val states = ArrayList<State>()
+    protected open val states = ArrayList<SuspendState>()
 
     /**
      * Состояние покоя.
      */
-    var restingState = State("Resting State", 0)
+    var restingState = SuspendState("Resting State", 0)
 
     /**
      * Текущее состояние машины. По умолчанию состояние покоя
      */
-    var currentState: State = restingState
+    var currentState: SuspendState = restingState
 
     /**
      * Предыдущее состояние машины. По умолчанию состояние покоя
      */
-    var previousState: State = restingState
+    var previousState: SuspendState = restingState
 
-    open fun startMachine(states: ArrayList<State>) {
+    open suspend fun startMachine(states: ArrayList<SuspendState>) {
         this.states.addAll(states)
         onNextState()
         do {
@@ -32,7 +30,7 @@ open class StateMachine {
     /**
      * Устанавливает следующее состояние. Если [state] == null, то выбор происходит из массива состояний.
      */
-    open fun onNextState(state: State? = null) {
+    open suspend fun onNextState(state: SuspendState? = null) {
         if (state == null) {
             onNextStateFromArray()
         } else {
@@ -43,7 +41,7 @@ open class StateMachine {
     /**
      * Устанавливает следующее состояние на основе массива состояний.
      */
-    protected open fun onNextStateFromArray() {
+    protected open suspend fun onNextStateFromArray() {
         if (!states.isNullOrEmpty()) {
             val nextState = states.first { checkCondition(it) }
             onSwitchState(nextState)
@@ -55,14 +53,14 @@ open class StateMachine {
     /**
      * Проверяет условие перехода в состояние. Если null, то всегда false
      */
-    protected open fun checkCondition(state: State): Boolean {
+    protected open fun checkCondition(state: SuspendState): Boolean {
         return state.condition?.invoke() ?: false
     }
 
     /**
      * Меняет состояние и запускает действие.
      */
-    protected open fun onSwitchState(state: State) {
+    protected open suspend fun onSwitchState(state: SuspendState) {
         previousState = currentState
         currentState = state
         if (state.isInvokeOnStart && state.action != null) {
@@ -73,20 +71,18 @@ open class StateMachine {
     /**
      * Запускает действие, при переходе в состояние.
      */
-    protected open fun invokeCurrentState() {
-        runBlocking {
-            currentState.action?.invoke()
-        }
+    protected open suspend fun invokeCurrentState() {
+        currentState.action?.invoke()
     }
 
     /**
      * Проверка, является ли [state] состоянием покоя.
      */
-    protected fun isRestingState(state: State): Boolean {
+    protected fun isRestingState(state: SuspendState): Boolean {
         return state.id == restingState.id
     }
 
     companion object {
-        const val TAG = "StateMachine"
+        const val TAG = "SuspendStateMachine"
     }
 }

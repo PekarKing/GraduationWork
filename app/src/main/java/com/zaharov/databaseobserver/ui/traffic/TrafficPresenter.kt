@@ -1,7 +1,7 @@
 package com.zaharov.databaseobserver.ui.traffic
 
 import com.zaharov.databaseobserver.fsm.SuspendState
-import com.zaharov.databaseobserver.fsm.SuspendStateMachine
+import com.zaharov.databaseobserver.fsm.InfiniteStateMachine
 import com.zaharov.databaseobserver.ui.base.BasePresenter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -9,7 +9,7 @@ import moxy.presenterScope
 
 class TrafficPresenter : BasePresenter<TrafficView>() {
 
-    private var stateMachine = SuspendStateMachine()
+    private var stateMachine = InfiniteStateMachine()
 
     fun startStateMachine() {
         val red = SuspendState("red", 1)

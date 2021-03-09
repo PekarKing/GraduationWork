@@ -8,6 +8,7 @@ import com.zaharov.databaseobserver.R
 import com.zaharov.databaseobserver.ui.app.AppActivity
 import com.zaharov.databaseobserver.ui.base.BaseFragment
 import com.zaharov.databaseobserver.ui.base.BaseView
+import com.zaharov.databaseobserver.ui.checker.StatesFragment
 import com.zaharov.databaseobserver.ui.traffic.TrafficFragment
 import com.zaharov.databaseobserver.utils.navigation.OnNavigateListener
 import moxy.ktx.moxyPresenter
@@ -24,6 +25,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main), MainView {
     private var onNavigateListener: OnNavigateListener? = null
 
     private lateinit var btnOpenTraffic: Button
+    private lateinit var btnOpenStates: Button
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -33,10 +35,20 @@ class MainFragment : BaseFragment(R.layout.fragment_main), MainView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnOpenTraffic = view.findViewById(R.id.btnOpenTraffic)
+        btnOpenStates = view.findViewById(R.id.btnOpenStates)
+
         btnOpenTraffic.setOnClickListener {
             onNavigateListener?.onNavigate(
                 TrafficFragment.newInstance(),
                 TrafficFragment.TAG,
+                isAddToBackStack = true
+            )
+        }
+
+        btnOpenStates.setOnClickListener {
+            onNavigateListener?.onNavigate(
+                StatesFragment.newInstance(),
+                StatesFragment.TAG,
                 isAddToBackStack = true
             )
         }
